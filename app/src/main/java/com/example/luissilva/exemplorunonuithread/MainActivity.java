@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadImg(View view){
+        //This class will do the work for you
         HelperDownloadImgWeb helperDownload = new HelperDownloadImgWeb(this);
         helperDownload.downloadImg((ImageView) findViewById(R.id.imgLoaded));
     }

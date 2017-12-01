@@ -16,17 +16,19 @@ import java.net.URL;
 
 public class HelperDownloadImgWeb {
 
-    private static Activity mActivity;
-    private static Bitmap img;
+    private static Activity mActivity; // activity where the image will be showed
+    private static Bitmap img; // Element to the interface where image will be loaded
 
     public HelperDownloadImgWeb(Activity pActivity) {
         this.mActivity = pActivity;
     }
 
     public void downloadImg(final ImageView pImageView){
+        // This thread has been created because we can't use the HttpURLConnection directly on the main thread
         new Thread(){
             public void run(){
                 try{
+                    // This class and functions will work to load the image
                     URL url = new URL(StringConstants.URL_IMG);
                     HttpURLConnection conection = (HttpURLConnection) url.openConnection();
                     InputStream inputStream = conection.getInputStream();
@@ -36,10 +38,12 @@ public class HelperDownloadImgWeb {
                     e.printStackTrace();
                 }
 
+                // this method allow us to access and show the imageView
                 mActivity.runOnUiThread(new Runnable(){
 
                     @Override
                     public void run() {
+                        //
                         pImageView.setImageBitmap(img);
                     }
                 });
